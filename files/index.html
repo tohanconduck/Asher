@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON SIEGE — 2D Top-Down Shooter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ CANVAS CHÍNH ============ -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Lớp phủ đỏ khi người chơi bị trúng đạn -->
+  <div id="hitFlash"></div>
+  <!-- Vignette viền màn hình cho chiều sâu -->
+  <div id="vignette"></div>
+
+  <!-- ============ HUD (hiển thị khi đang chơi) ============ -->
+  <div id="hud" class="hidden">
+    <div class="hud-top-left">
+      <div class="health-wrap">
+        <div class="health-label">HP</div>
+        <div class="health-bar-bg">
+          <div id="healthBar" class="health-bar-fill"></div>
+        </div>
+        <span id="healthText">100 / 100</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-chip">SCORE <span id="scoreVal">0</span></div>
+        <div class="stat-chip">KILLS <span id="killsVal">0</span></div>
+      </div>
+    </div>
+
+    <div class="hud-top-right">
+      <div id="waveBanner" class="stat-chip wave-chip">WAVE <span id="waveVal">1</span></div>
+      <div class="stat-chip">TIME <span id="timeVal">00:00</span></div>
+      <div class="stat-chip fps-chip">FPS <span id="fpsVal">60</span></div>
+    </div>
+
+    <div id="dashIndicator" class="dash-wrap">
+      <div class="dash-label">DASH</div>
+      <div class="dash-bar-bg"><div id="dashBar" class="dash-bar-fill"></div></div>
+    </div>
+
+    <div id="waveIntermission" class="wave-intermission hidden">
+      <div id="waveIntermissionText">WAVE 2 INCOMING</div>
+    </div>
+
+    <div id="bossHealthWrap" class="boss-health-wrap hidden">
+      <div class="boss-name">⚠ BOSS — ENFORCER ⚠</div>
+      <div class="boss-bar-bg"><div id="bossBar" class="boss-bar-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ============ CROSSHAIR ============ -->
+  <div id="crosshair" class="hidden">
+    <div class="crosshair-line ch-h"></div>
+    <div class="crosshair-line ch-v"></div>
+    <div class="crosshair-dot"></div>
+  </div>
+
+  <!-- ============ MENU CHÍNH ============ -->
+  <div id="mainMenu" class="overlay">
+    <div class="menu-panel">
+      <h1 class="game-title"><span>NEON</span> SIEGE</h1>
+      <p class="game-subtitle">SỐNG SÓT QUA TỪNG ĐỢT TẤN CÔNG</p>
+      <div class="menu-buttons">
+        <button id="btnStart" class="btn btn-primary">▶ BẮT ĐẦU</button>
+        <button id="btnSettings" class="btn btn-secondary">⚙ CÀI ĐẶT</button>
+      </div>
+      <div class="menu-help">
+        <div class="help-row"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>Di chuyển</span></div>
+        <div class="help-row"><kbd>CHUỘT</kbd><span>Ngắm &amp; Bắn (chuột trái)</span></div>
+        <div class="help-row"><kbd>SHIFT</kbd><span>Lướt (Dash)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MENU CÀI ĐẶT ============ -->
+  <div id="settingsMenu" class="overlay hidden">
+    <div class="menu-panel">
+      <h2 class="panel-title">CÀI ĐẶT ÂM LƯỢNG</h2>
+      <div class="slider-row">
+        <label for="sfxVolume">Âm thanh súng / nổ</label>
+        <input type="range" id="sfxVolume" min="0" max="100" value="70">
+        <span id="sfxVolumeVal">70%</span>
+      </div>
+      <div class="slider-row">
+        <label for="musicVolume">Nhạc nền</label>
+        <input type="range" id="musicVolume" min="0" max="100" value="35">
+        <span id="musicVolumeVal">35%</span>
+      </div>
+      <div class="menu-buttons">
+        <button id="btnBack" class="btn btn-secondary">⬅ QUAY LẠI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ GAME OVER ============ -->
+  <div id="gameOverScreen" class="overlay hidden">
+    <div class="menu-panel go-panel">
+      <h2 class="panel-title go-title">GAME OVER</h2>
+      <div class="go-stats">
+        <div class="go-stat"><span class="go-stat-label">ĐIỂM SỐ</span><span id="finalScore" class="go-stat-val">0</span></div>
+        <div class="go-stat"><span class="go-stat-label">SỐ KẺ ĐỊCH HẠ</span><span id="finalKills" class="go-stat-val">0</span></div>
+        <div class="go-stat"><span class="go-stat-label">WAVE ĐẠT ĐƯỢC</span><span id="finalWave" class="go-stat-val">1</span></div>
+        <div class="go-stat"><span class="go-stat-label">THỜI GIAN</span><span id="finalTime" class="go-stat-val">00:00</span></div>
+      </div>
+      <div class="menu-buttons">
+        <button id="btnRetry" class="btn btn-primary">↻ CHƠI LẠI</button>
+        <button id="btnMainMenu" class="btn btn-secondary">☰ MENU CHÍNH</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
